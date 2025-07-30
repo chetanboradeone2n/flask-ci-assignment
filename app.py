@@ -2,7 +2,16 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+<<<<<<< HEAD
 students = []
+=======
+@app.route("/")
+def home():
+    return "Hello from Flask!"
+
+if __name__ == "__main__":
+    app.run()
+>>>>>>> dc1631c
 
 @app.route("/api/v1/healthcheck", methods=["GET"])
 def healthcheck():

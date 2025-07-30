@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 blinker==1.9.0
 click==8.1.8
 Flask==3.1.1
@@ -8,3 +9,8 @@ MarkupSafe==3.0.2
 Werkzeug==3.1.3
 zipp==3.23.0
 psycopg2-binary==2.9.10
+=======
+flask
+requests
+
+>>>>>>> dc1631c

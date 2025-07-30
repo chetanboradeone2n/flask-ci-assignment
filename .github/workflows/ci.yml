@@ -1,15 +1,23 @@
-name: CI Pipeline
+name: Simple CI
 
 on:
   workflow_dispatch:
 
 jobs:
-  test-runner:
+  build:
     runs-on: [self-hosted, macOS, X64]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Build (install dependencies)
-        run: make build
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install --no-cache-dir -r requirements.txt
 

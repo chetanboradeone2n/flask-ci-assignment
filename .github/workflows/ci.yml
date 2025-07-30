@@ -1,45 +1,32 @@
-<<<<<<< HEAD
-name: CI Pipeline
-=======
-name: Simple CI
+name: Test Self-hosted Runner
 
->>>>>>> dc1631c
 on:
   push:
     branches: [ main ]
     paths:
       - 'app.py'
       - 'requirements.txt'
-      - 'Makefile'
   workflow_dispatch:
+
 jobs:
-<<<<<<< HEAD
-  build-api:
-=======
-  build:
->>>>>>> dc1631c
+  runner-test:
     runs-on: [self-hosted, macOS, X64]
+
     steps:
-<<<<<<< HEAD
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
-    - name: Install dependencies
-      run: make build
-=======
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install --no-cache-dir -r requirements.txt
+          python3 -m pip install -r requirements.txt
 
->>>>>>> dc1631c
+      - name: Run Flask App (dry test)
+        run: |
+          echo "✅ Runner is working correctly."
+

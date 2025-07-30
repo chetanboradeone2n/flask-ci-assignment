@@ -1,4 +1,5 @@
 name: CI Pipeline
+
 on:
   push:
     branches: [ main ]
@@ -8,36 +9,38 @@ on:
       - 'requirements.txt'
       - 'Dockerfile'
       - 'Makefile'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'app.py'
-      - 'tests/**'
-      - 'requirements.txt'
-      - 'Dockerfile'
-      - 'Makefile'
   workflow_dispatch:
+
 jobs:
   build-and-deploy:
-    runs-on: [self-hosted, flask-ci-runner]
+    runs-on: [self-hosted, flask-ci-runner]  # Adjust this if needed
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
-    - name: Install dependencies
-      run: make build
-    - name: Run linting
-      run: make lint
-    - name: Run tests
-      run: make test
-    - name: Log in to DockerHub
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: make docker-login
-    - name: Build Docker image
-      run: make docker-build
-    - name: Push Docker image
-      run: make docker-push
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: make build
+
+      - name: Run linting
+        run: make lint
+
+      - name: Run tests
+        run: make test
+
+      # - name: Log in to DockerHub
+      #   env:
+      #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      #   run: make docker-login
+
+      # - name: Build Docker image
+      #   run: make docker-build
+
+      # - name: Push Docker image
+      #   run: make docker-push
+

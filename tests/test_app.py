@@ -1,13 +1,9 @@
-# tests/test_app.py
-
-import unittest
 from app import app
 
-class BasicTestCase(unittest.TestCase):
-    def test_home(self):
-        tester = app.test_client(self)
-        response = tester.get('/')
-        self.assertEqual(response.status_code, 200)
+# Create a test client
+client = app.test_client()
 
-if __name__ == "__main__":
-    unittest.main()
+def test_healthcheck():
+    response = client.get("/api/v1/healthcheck")
+    assert response.status_code == 200
+    assert response.get_json() == {"status": "ok"}
